@@ -1,0 +1,50 @@
+<div class="residences">
+  <table border="10px" bgcolor="#f4a460">
+    <tr>
+      <th>Image</th>
+      <th>Status</th>
+      <th>Actions</th>
+    </tr>
+    <tr *ngFor="let residence of listResidences" class="residence">
+      <td>
+        <img [src]="residence.image" alt="{{ residence.name }}" width="100px">
+      </td>
+      <td>
+        <p [ngSwitch]="residence.status">
+          <span *ngSwitchCase="'Disponible'">✅ Disponible</span>
+          <span *ngSwitchCase="'Vendu'">❌ Vendu</span>
+          <span *ngSwitchCase="'En Construction'">🚧 En Construction</span>
+        </p>
+      </td>
+      <td>
+        <button (click)="showLocation(residence)">Show Location</button>
+        <button (click)="addToFavorite(residence)">Add To Favoris</button>
+      </td>
+    </tr>
+  </table>
+</div>
+<!-- Liste des favoris -->
+<h2>Favoris</h2>
+<table border="5px" bgcolor="#90ee90">
+  <tr>
+    <th>Nom</th>
+    <th>Status</th>
+  </tr>
+  <tr *ngFor="let fav of favorites">
+    <td>{{ fav.name }}</td>
+    <td>{{ fav.status }}</td>
+  </tr>
+</table>
+
+<input type="text" [(ngModel)]="searchTerm" placeholder="Rechercher..." />
+<table border="2px">
+  <tr *ngFor="let residence of Search(searchTerm)">
+    <td>{{ residence.name }}</td>
+    <td>{{ residence.address }}</td>
+    <td>{{ residence.status }}</td>
+  </tr>
+</table>
+
+
+
+
